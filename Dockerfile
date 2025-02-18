@@ -5,12 +5,14 @@ RUN apk update \
     bash=5.2.26-r0 \
     openssh=9.7_p1-r4 \
     sshpass=1.10-r0 \
-    python3=3.12.8-r1 \
+    python3=3.12.9-r0 \
     py3-pip=24.0-r2 \
     && python3 -m venv /venv \
     && . /venv/bin/activate \
-    && pip install --upgrade pip \
-    && pip install ansible==11.0.0 passlib==1.7.4
+    && pip install --upgrade --no-cache-dir \
+    pip==25.0.1 \
+    ansible==11.0.0 \
+    passlib==1.7.4
 
 ENV PATH="/venv/bin:$PATH"
 
