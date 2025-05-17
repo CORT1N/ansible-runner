@@ -1,12 +1,12 @@
-FROM alpine:3.20.3
+FROM alpine:3.21.3
 
 RUN apk update \
     && apk add --no-cache \
-    bash=5.2.26-r0 \
-    openssh=9.7_p1-r4 \
+    bash=5.2.37-r0 \
+    openssh=9.9_p2-r0 \
     sshpass=1.10-r0 \
-    python3=3.12.9-r0 \
-    py3-pip=24.0-r2 \
+    python3=3.12.10-r0 \
+    py3-pip=24.3.1-r0 \
     && python3 -m venv /venv \
     && . /venv/bin/activate \
     && pip install --upgrade --no-cache-dir \

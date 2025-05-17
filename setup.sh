@@ -3,7 +3,7 @@
 set -e
 
 IMAGE_NAME="ansible-runner"
-IMAGE_TAG="1.0.0"
+IMAGE_TAG="1.1.0"
 
 # Building image
 echo "Building Docker image..."
@@ -28,7 +28,8 @@ zsh)
 esac
 
 for command in "${ANSIBLE_COMMANDS[@]}"; do
-    ALIAS_COMMAND="alias $command='docker run --rm -it -v \$(pwd):/workspace -w /workspace -v \$HOME/.ssh:/root/.ssh ${IMAGE_NAME}:${IMAGE_TAG} $command'"
+    ALIAS_COMMAND="alias $command='docker run --rm -it -v \"\$(pwd)\":/workspace -w /workspace -v \$HOME/.ssh:/root/.ssh -e ANSIBLE_USER=\$ANSIBLE_USER ${IMAGE_NAME}:${IMAGE_TAG} $command'"
+    # ANSIBLE_USER environment variable is optional, and can be used in some workflows where you play with ansible with multiple users
 
     if ! grep -Fxq "$ALIAS_COMMAND" "$SHELL_CONFIG"; then
         echo "Adding alias to $SHELL_CONFIG..."
